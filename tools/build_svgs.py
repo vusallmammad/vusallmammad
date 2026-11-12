@@ -22,14 +22,14 @@ def header():
     rnd = random.Random(7)
     W, H = 1000, 270
     stars = []
-    for _ in range(46):
+    for _ in range(34):
         x, y = rnd.uniform(10, W - 10), rnd.uniform(10, H - 10)
         r = rnd.choice([0.8, 1.1, 1.5, 2])
         d = rnd.uniform(2, 5)
         b = rnd.uniform(0, 4)
         stars.append(
             f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r}" fill="#fff">'
-            f'<animate attributeName="opacity" values="0.15;1;0.15" dur="{d:.1f}s" begin="{b:.1f}s" repeatCount="indefinite"/></circle>')
+            f'<animate attributeName="opacity" values="0.1;0.6;0.1" dur="{d:.1f}s" begin="{b:.1f}s" repeatCount="indefinite"/></circle>')
 
     phrases = [
         "automating the boring stuff so humans don't have to",
@@ -51,13 +51,13 @@ def header():
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="3s" repeatCount="indefinite"/>
       <!-- antenna -->
-      <line x1="60" y1="8" x2="60" y2="-14" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round"/>
+      <line x1="60" y1="8" x2="60" y2="-14" stroke="{PURPLE}" stroke-width="4" stroke-linecap="round"/>
       <circle cx="60" cy="-18" r="7" fill="{PINK}">
         <animate attributeName="fill" values="{PINK};{AMBER};{CYAN};{PINK}" dur="2.4s" repeatCount="indefinite"/>
       </circle>
       <!-- head -->
-      <rect x="10" y="8" width="100" height="76" rx="18" fill="#1e293b" stroke="{PURPLE}" stroke-width="4"/>
-      <rect x="22" y="22" width="76" height="46" rx="10" fill="#0b1020"/>
+      <rect x="10" y="8" width="100" height="76" rx="18" fill="url(#shell)" stroke="{PURPLE}" stroke-width="4"/>
+      <rect x="22" y="22" width="76" height="46" rx="10" fill="#0b1020" stroke="{CYAN}" stroke-opacity=".35" stroke-width="1.5"/>
       <rect x="36" y="32" width="14" height="16" rx="3" fill="{CYAN}">
         <animate attributeName="height" values="16;16;2;16;16" keyTimes="0;0.9;0.94;0.98;1" dur="4s" repeatCount="indefinite"/>
         <animate attributeName="y" values="32;32;39;32;32" keyTimes="0;0.9;0.94;0.98;1" dur="4s" repeatCount="indefinite"/>
@@ -69,19 +69,19 @@ def header():
       <path d="M46 56 Q60 64 74 56" stroke="{CYAN}" stroke-width="3" fill="none" stroke-linecap="round"/>
       <circle cx="26" cy="62" r="4" fill="{PINK}" opacity=".55"/>
       <circle cx="94" cy="62" r="4" fill="{PINK}" opacity=".55"/>
-      <!-- body -->
-      <rect x="24" y="90" width="72" height="56" rx="12" fill="#1e293b" stroke="{PURPLE}" stroke-width="4"/>
+      <!-- neck + body -->`n      <rect x="48" y="82" width="24" height="10" rx="3" fill="{PURPLE}" opacity=".7"/>
+      <rect x="24" y="90" width="72" height="56" rx="12" fill="url(#shell)" stroke="{PURPLE}" stroke-width="4"/>`n      <rect x="36" y="102" width="48" height="32" rx="7" fill="#0b1020"/>
       <text x="60" y="126" text-anchor="middle" class="mono" font-size="20" font-weight="700" fill="{GREEN}">{{ }}</text>
       <!-- left arm -->
-      <rect x="2" y="96" width="16" height="40" rx="8" fill="#334155"/>
+      <rect x="3" y="96" width="15" height="40" rx="7.5" fill="url(#shell)" stroke="{PURPLE}" stroke-width="3"/>
       <!-- waving right arm -->
       <g>
         <animateTransform attributeName="transform" type="rotate" values="0 104 98;-38 104 98;0 104 98;-38 104 98;0 104 98;0 104 98" keyTimes="0;0.12;0.24;0.36;0.48;1" dur="4s" repeatCount="indefinite"/>
-        <rect x="100" y="60" width="16" height="44" rx="8" fill="#334155"/>
-        <circle cx="108" cy="58" r="10" fill="#475569"/>
+        <rect x="101" y="62" width="15" height="42" rx="7.5" fill="url(#shell)" stroke="{PURPLE}" stroke-width="3"/>
+        <circle cx="108.5" cy="58" r="9" fill="{CYAN}"/>
       </g>
     </g>
-    <ellipse cx="60" cy="178" rx="46" ry="7" fill="#000" opacity=".35">
+    <ellipse cx="60" cy="178" rx="46" ry="6" fill="{CYAN}" opacity=".18">
       <animate attributeName="rx" values="46;38;46" dur="3s" repeatCount="indefinite"/>
     </ellipse>
   </g>'''
@@ -90,25 +90,27 @@ def header():
   <style>.mono{{font-family:{MONO}}} .sans{{font-family:{SANS}}}</style>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0f0c29"/><stop offset=".55" stop-color="#302b63"/><stop offset="1" stop-color="#1a1a3a"/>
+      <stop offset="0" stop-color="#0b1020"/><stop offset=".6" stop-color="#111827"/><stop offset="1" stop-color="#1e1b4b"/>
     </linearGradient>
     <linearGradient id="name" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="{CYAN}"/><stop offset=".5" stop-color="{PURPLE}"/><stop offset="1" stop-color="{PINK}"/>
       <animateTransform attributeName="gradientTransform" type="translate" values="-0.4 0;0.4 0;-0.4 0" dur="6s" repeatCount="indefinite"/>
     </linearGradient>
-    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+    <radialGradient id="glowP"><stop offset="0" stop-color="{PURPLE}" stop-opacity=".30"/><stop offset="1" stop-color="{PURPLE}" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowC"><stop offset="0" stop-color="{CYAN}" stop-opacity=".22"/><stop offset="1" stop-color="{CYAN}" stop-opacity="0"/></radialGradient>
+    <linearGradient id="shell" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3557"/><stop offset="1" stop-color="#1a2238"/></linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{CYAN}"/><stop offset=".5" stop-color="{PURPLE}"/><stop offset="1" stop-color="{PINK}"/></linearGradient>
+    <pattern id="hgrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#ffffff" stroke-opacity=".035"/></pattern>
     <clipPath id="card"><rect width="{W}" height="{H}" rx="22"/></clipPath>
   </defs>
   <g clip-path="url(#card)">
     <rect width="{W}" height="{H}" fill="url(#bg)"/>
-    <circle cx="180" cy="60" r="120" fill="{PURPLE}" opacity=".35" filter="url(#blur)">
-      <animate attributeName="cx" values="180;320;180" dur="14s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="760" cy="230" r="130" fill="{CYAN}" opacity=".22" filter="url(#blur)">
-      <animate attributeName="cy" values="230;150;230" dur="11s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="520" cy="250" r="90" fill="{PINK}" opacity=".22" filter="url(#blur)">
-      <animate attributeName="cx" values="520;420;520" dur="9s" repeatCount="indefinite"/>
+    <rect width="{W}" height="{H}" fill="url(#hgrid)"/>
+    <ellipse cx="260" cy="110" rx="340" ry="190" fill="url(#glowP)">
+      <animate attributeName="cx" values="240;330;240" dur="14s" repeatCount="indefinite"/>
+    </ellipse>
+    <circle cx="860" cy="150" r="170" fill="url(#glowC)">
+      <animate attributeName="r" values="160;185;160" dur="6s" repeatCount="indefinite"/>
     </circle>
     {''.join(stars)}
     <text x="60" y="82" class="mono" font-size="17" fill="#94a3b8">~/github $ ./say-hi --loud</text>
@@ -117,6 +119,7 @@ def header():
     <text x="60" y="238" class="mono" font-size="14" fill="#64748b">power platform · azure · react/ts · ai agents · java</text>
     {robot}
   </g>
+  <rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="21" fill="none" stroke="url(#edge)" stroke-opacity=".55" stroke-width="2"/>
 </svg>'''
     (OUT / "header.svg").write_text(svg, encoding="utf-8")
 
