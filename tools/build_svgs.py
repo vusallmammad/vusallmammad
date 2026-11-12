@@ -83,7 +83,7 @@ def header():
     </ellipse>
   </g>"""
 
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="vusallmammad — animated banner">
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Lone — animated banner">
   <style>.mono{{font-family:{MONO}}} .sans{{font-family:{SANS}}}</style>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -100,7 +100,7 @@ def header():
     <circle cx="860" cy="150" r="170" fill="url(#glow)"/>
     {''.join(stars)}
     <text x="60" y="82" class="mono" font-size="17" fill="{DIM}">~/github $ ./say-hi --loud</text>
-    <text x="58" y="150" class="sans" font-size="64" font-weight="800" fill="{WHITE}" letter-spacing="-1">vusallmammad</text>
+    <text x="58" y="150" class="sans" font-size="64" font-weight="800" fill="{WHITE}" letter-spacing="-1">Lone</text>
     {''.join(taglines)}
     <text x="60" y="238" class="mono" font-size="14" fill="{DIM}">power platform · azure · react/ts · ai agents · java</text>
     {robot}
