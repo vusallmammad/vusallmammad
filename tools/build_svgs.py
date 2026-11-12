@@ -17,19 +17,20 @@ PURPLE, CYAN, PINK, GREEN, AMBER, BLUE, RED, ORANGE = (
     "#a78bfa", "#22d3ee", "#f472b6", "#4ade80", "#fbbf24", "#60a5fa", "#f87171", "#fb923c")
 
 
-# ---------------------------------------------------------------- header
+# ---------------------------------------------------------------- header (black / white / navy only)
 def header():
     rnd = random.Random(7)
     W, H = 1000, 270
+    INK, NAVY, NAVY2, WHITE, SOFT, DIM = "#05070d", "#0a1428", "#13233f", "#f8fafc", "#cbd5e1", "#64748b"
     stars = []
-    for _ in range(34):
+    for _ in range(30):
         x, y = rnd.uniform(10, W - 10), rnd.uniform(10, H - 10)
-        r = rnd.choice([0.8, 1.1, 1.5, 2])
+        r = rnd.choice([0.7, 1, 1.3])
         d = rnd.uniform(2, 5)
         b = rnd.uniform(0, 4)
         stars.append(
-            f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r}" fill="#fff">'
-            f'<animate attributeName="opacity" values="0.1;0.6;0.1" dur="{d:.1f}s" begin="{b:.1f}s" repeatCount="indefinite"/></circle>')
+            f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r}" fill="{WHITE}">'
+            f'<animate attributeName="opacity" values="0.08;0.5;0.08" dur="{d:.1f}s" begin="{b:.1f}s" repeatCount="indefinite"/></circle>')
 
     phrases = [
         "automating the boring stuff so humans don't have to",
@@ -41,86 +42,71 @@ def header():
     taglines = []
     for i, p in enumerate(phrases):
         taglines.append(
-            f'<text x="60" y="196" class="mono" font-size="19" fill="#e2e8f0" opacity="0">'
-            f'<tspan fill="{GREEN}">&gt; </tspan>{escape(p)}'
+            f'<text x="60" y="196" class="mono" font-size="19" fill="{SOFT}" opacity="0">'
+            f'<tspan fill="{DIM}">&gt; </tspan>{escape(p)}'
             f'<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.22;0.25;1" '
             f'dur="{cyc}s" begin="{i * 3.5}s" repeatCount="indefinite"/></text>')
 
-    robot = f'''
+    blink = 'keyTimes="0;0.9;0.94;0.98;1" dur="4s" repeatCount="indefinite"'
+    robot = f"""
   <g transform="translate(800 70)">
     <g>
       <animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="3s" repeatCount="indefinite"/>
-      <!-- antenna -->
-      <line x1="60" y1="8" x2="60" y2="-14" stroke="{PURPLE}" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="60" cy="-18" r="7" fill="{PINK}">
-        <animate attributeName="fill" values="{PINK};{AMBER};{CYAN};{PINK}" dur="2.4s" repeatCount="indefinite"/>
+      <line x1="60" y1="8" x2="60" y2="-14" stroke="{SOFT}" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="-18" r="6" fill="{WHITE}">
+        <animate attributeName="opacity" values="1;.35;1" dur="2s" repeatCount="indefinite"/>
       </circle>
-      <!-- head -->
-      <rect x="10" y="8" width="100" height="76" rx="18" fill="url(#shell)" stroke="{PURPLE}" stroke-width="4"/>
-      <rect x="22" y="22" width="76" height="46" rx="10" fill="#0b1020" stroke="{CYAN}" stroke-opacity=".35" stroke-width="1.5"/>
-      <rect x="36" y="32" width="14" height="16" rx="3" fill="{CYAN}">
-        <animate attributeName="height" values="16;16;2;16;16" keyTimes="0;0.9;0.94;0.98;1" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="y" values="32;32;39;32;32" keyTimes="0;0.9;0.94;0.98;1" dur="4s" repeatCount="indefinite"/>
+      <rect x="10" y="8" width="100" height="76" rx="18" fill="url(#shell)" stroke="{SOFT}" stroke-width="3"/>
+      <rect x="22" y="22" width="76" height="46" rx="10" fill="{INK}"/>
+      <rect x="36" y="32" width="14" height="16" rx="3" fill="{WHITE}">
+        <animate attributeName="height" values="16;16;2;16;16" {blink}/>
+        <animate attributeName="y" values="32;32;39;32;32" {blink}/>
       </rect>
-      <rect x="70" y="32" width="14" height="16" rx="3" fill="{CYAN}">
-        <animate attributeName="height" values="16;16;2;16;16" keyTimes="0;0.9;0.94;0.98;1" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="y" values="32;32;39;32;32" keyTimes="0;0.9;0.94;0.98;1" dur="4s" repeatCount="indefinite"/>
+      <rect x="70" y="32" width="14" height="16" rx="3" fill="{WHITE}">
+        <animate attributeName="height" values="16;16;2;16;16" {blink}/>
+        <animate attributeName="y" values="32;32;39;32;32" {blink}/>
       </rect>
-      <path d="M46 56 Q60 64 74 56" stroke="{CYAN}" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <circle cx="26" cy="62" r="4" fill="{PINK}" opacity=".55"/>
-      <circle cx="94" cy="62" r="4" fill="{PINK}" opacity=".55"/>
-      <!-- neck + body -->`n      <rect x="48" y="82" width="24" height="10" rx="3" fill="{PURPLE}" opacity=".7"/>
-      <rect x="24" y="90" width="72" height="56" rx="12" fill="url(#shell)" stroke="{PURPLE}" stroke-width="4"/>`n      <rect x="36" y="102" width="48" height="32" rx="7" fill="#0b1020"/>
-      <text x="60" y="126" text-anchor="middle" class="mono" font-size="20" font-weight="700" fill="{GREEN}">{{ }}</text>
-      <!-- left arm -->
-      <rect x="3" y="96" width="15" height="40" rx="7.5" fill="url(#shell)" stroke="{PURPLE}" stroke-width="3"/>
-      <!-- waving right arm -->
+      <path d="M46 56 Q60 64 74 56" stroke="{WHITE}" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="50" y="83" width="20" height="9" rx="3" fill="{SOFT}" opacity=".6"/>
+      <rect x="24" y="90" width="72" height="56" rx="12" fill="url(#shell)" stroke="{SOFT}" stroke-width="3"/>
+      <rect x="36" y="102" width="48" height="32" rx="7" fill="{INK}"/>
+      <text x="60" y="124" text-anchor="middle" class="mono" font-size="18" font-weight="700" fill="{WHITE}">{{ }}</text>
+      <rect x="3" y="96" width="15" height="40" rx="7.5" fill="url(#shell)" stroke="{SOFT}" stroke-width="2.5"/>
       <g>
         <animateTransform attributeName="transform" type="rotate" values="0 104 98;-38 104 98;0 104 98;-38 104 98;0 104 98;0 104 98" keyTimes="0;0.12;0.24;0.36;0.48;1" dur="4s" repeatCount="indefinite"/>
-        <rect x="101" y="62" width="15" height="42" rx="7.5" fill="url(#shell)" stroke="{PURPLE}" stroke-width="3"/>
-        <circle cx="108.5" cy="58" r="9" fill="{CYAN}"/>
+        <rect x="101" y="62" width="15" height="42" rx="7.5" fill="url(#shell)" stroke="{SOFT}" stroke-width="2.5"/>
+        <circle cx="108.5" cy="58" r="8.5" fill="{WHITE}"/>
       </g>
     </g>
-    <ellipse cx="60" cy="178" rx="46" ry="6" fill="{CYAN}" opacity=".18">
+    <ellipse cx="60" cy="178" rx="46" ry="6" fill="#000" opacity=".45">
       <animate attributeName="rx" values="46;38;46" dur="3s" repeatCount="indefinite"/>
     </ellipse>
-  </g>'''
+  </g>"""
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="vusallmammad — animated banner">
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="vusallmammad — animated banner">
   <style>.mono{{font-family:{MONO}}} .sans{{font-family:{SANS}}}</style>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b1020"/><stop offset=".6" stop-color="#111827"/><stop offset="1" stop-color="#1e1b4b"/>
+      <stop offset="0" stop-color="{INK}"/><stop offset=".6" stop-color="{NAVY}"/><stop offset="1" stop-color="{NAVY2}"/>
     </linearGradient>
-    <linearGradient id="name" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="{CYAN}"/><stop offset=".5" stop-color="{PURPLE}"/><stop offset="1" stop-color="{PINK}"/>
-      <animateTransform attributeName="gradientTransform" type="translate" values="-0.4 0;0.4 0;-0.4 0" dur="6s" repeatCount="indefinite"/>
-    </linearGradient>
-    <radialGradient id="glowP"><stop offset="0" stop-color="{PURPLE}" stop-opacity=".30"/><stop offset="1" stop-color="{PURPLE}" stop-opacity="0"/></radialGradient>
-    <radialGradient id="glowC"><stop offset="0" stop-color="{CYAN}" stop-opacity=".22"/><stop offset="1" stop-color="{CYAN}" stop-opacity="0"/></radialGradient>
-    <linearGradient id="shell" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3557"/><stop offset="1" stop-color="#1a2238"/></linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{CYAN}"/><stop offset=".5" stop-color="{PURPLE}"/><stop offset="1" stop-color="{PINK}"/></linearGradient>
-    <pattern id="hgrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#ffffff" stroke-opacity=".035"/></pattern>
+    <radialGradient id="glow"><stop offset="0" stop-color="#1e3a66" stop-opacity=".55"/><stop offset="1" stop-color="#1e3a66" stop-opacity="0"/></radialGradient>
+    <linearGradient id="shell" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2b4a"/><stop offset="1" stop-color="#0f1a30"/></linearGradient>
+    <pattern id="hgrid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#ffffff" stroke-opacity=".03"/></pattern>
     <clipPath id="card"><rect width="{W}" height="{H}" rx="22"/></clipPath>
   </defs>
   <g clip-path="url(#card)">
     <rect width="{W}" height="{H}" fill="url(#bg)"/>
     <rect width="{W}" height="{H}" fill="url(#hgrid)"/>
-    <ellipse cx="260" cy="110" rx="340" ry="190" fill="url(#glowP)">
-      <animate attributeName="cx" values="240;330;240" dur="14s" repeatCount="indefinite"/>
-    </ellipse>
-    <circle cx="860" cy="150" r="170" fill="url(#glowC)">
-      <animate attributeName="r" values="160;185;160" dur="6s" repeatCount="indefinite"/>
-    </circle>
+    <circle cx="860" cy="150" r="170" fill="url(#glow)"/>
     {''.join(stars)}
-    <text x="60" y="82" class="mono" font-size="17" fill="#94a3b8">~/github $ ./say-hi --loud</text>
-    <text x="58" y="150" class="sans" font-size="64" font-weight="800" fill="url(#name)" letter-spacing="-1">vusallmammad</text>
+    <text x="60" y="82" class="mono" font-size="17" fill="{DIM}">~/github $ ./say-hi --loud</text>
+    <text x="58" y="150" class="sans" font-size="64" font-weight="800" fill="{WHITE}" letter-spacing="-1">vusallmammad</text>
     {''.join(taglines)}
-    <text x="60" y="238" class="mono" font-size="14" fill="#64748b">power platform · azure · react/ts · ai agents · java</text>
+    <text x="60" y="238" class="mono" font-size="14" fill="{DIM}">power platform · azure · react/ts · ai agents · java</text>
     {robot}
   </g>
-  <rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="21" fill="none" stroke="url(#edge)" stroke-opacity=".55" stroke-width="2"/>
-</svg>'''
+  <rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="21" fill="none" stroke="#1e2a44" stroke-width="2"/>
+</svg>"""
     (OUT / "header.svg").write_text(svg, encoding="utf-8")
 
 
@@ -343,25 +329,33 @@ def footer():
     (OUT / "footer.svg").write_text(svg, encoding="utf-8")
 
 
-# ---------------------------------------------------------------- badge row (plain black / navy, normal size)
+# ---------------------------------------------------------------- badge row
+# The three original shields.io "for-the-badge" badges, fetched and joined into one SVG so they
+# stay in one row and GitHub does not turn them into links.
 def badges():
-    items = [("status", "probably automating something"), ("coffee", "→ code"), ("bugs squashed", "lost count")]
-    CH, PAD, GAP, H = 6.6, 8, 8, 20          # ~Verdana 11px char width, side padding, gap between badges
-    x, parts = 0.0, []
-    for label, value in items:
-        lw, vw = len(label) * CH + 2 * PAD, len(value) * CH + 2 * PAD
-        parts.append(
-            f'<g transform="translate({x:.1f} 0)">'
-            f'<rect width="{lw + vw:.1f}" height="{H}" rx="3" fill="#1f2a44"/>'
-            f'<path d="M3 0h{lw - 3:.1f}v{H}h-{lw - 3:.1f}a3 3 0 0 1 -3 -3v-{H - 6}a3 3 0 0 1 3 -3z" fill="#0d1117"/>'
-            f'<text x="{lw / 2:.1f}" y="14" text-anchor="middle" fill="#c9d1d9">{escape(label)}</text>'
-            f'<text x="{lw + vw / 2:.1f}" y="14" text-anchor="middle" fill="#ffffff">{escape(value)}</text></g>')
-        x += lw + vw + GAP
+    import re
+    import urllib.request
+    urls = [
+        "https://img.shields.io/badge/status-probably_automating_something-a78bfa?style=for-the-badge&labelColor=1e1b4b",
+        "https://img.shields.io/badge/coffee-%E2%86%92_code-fbbf24?style=for-the-badge&labelColor=1e1b4b",
+        "https://img.shields.io/badge/bugs_squashed-lost_count-4ade80?style=for-the-badge&labelColor=1e1b4b",
+    ]
+    GAP, x, parts, H = 6, 0.0, [], 28
+    for n, u in enumerate(urls):
+        req = urllib.request.Request(u, headers={"User-Agent": "profile-readme-build"})
+        s = urllib.request.urlopen(req, timeout=20).read().decode("utf-8")
+        w = float(re.search(r'<svg[^>]*\swidth="([\d.]+)"', s).group(1))
+        H = float(re.search(r'<svg[^>]*\sheight="([\d.]+)"', s).group(1))
+        s = re.sub(r'\bid="([^"]+)"', lambda m: f'id="b{n}{m.group(1)}"', s)
+        s = re.sub(r'url\(#([^)]+)\)', lambda m: f'url(#b{n}{m.group(1)})', s)
+        s = re.sub(r'<title>.*?</title>', '', s)
+        s = s.replace("<svg ", f'<svg x="{x:.1f}" y="0" ', 1)
+        parts.append(s)
+        x += w + GAP
     W = x - GAP
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.1f} {H}" width="{W:.1f}" height="{H}" role="img" '
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.1f} {H:.0f}" width="{W:.1f}" height="{H:.0f}" role="img" '
            f'aria-label="status: probably automating something · coffee → code · bugs squashed: lost count">'
-           f'<style>text{{font-family:Verdana,"DejaVu Sans",Geneva,sans-serif;font-size:11px}}</style>'
-           + "".join(parts) + '</svg>')
+           + "".join(parts) + "</svg>")
     (OUT / "badges.svg").write_text(svg, encoding="utf-8")
 
 
