@@ -107,7 +107,7 @@ def header():
   </g>
   <rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="21" fill="none" stroke="#1e2a44" stroke-width="2"/>
 </svg>"""
-    (OUT / "header.svg").write_text(svg, encoding="utf-8")
+    (OUT / "hero.svg").write_text(svg, encoding="utf-8")
 
 
 # ---------------------------------------------------------------- terminal
@@ -118,7 +118,7 @@ def terminal():
     X0 = 28
     TOP = 66
     TYPE = 0.055      # seconds per typed char
-    user = "vusallmammad"
+    user = "Lone"
     prompt = [(user, GREEN), ("@", "#94a3b8"), ("github", PURPLE), (":", "#94a3b8"), ("~", BLUE), ("$", "#94a3b8")]
     plen_draw = sum(len(t) for t, _ in prompt)
     plen = plen_draw + 1  # one blank cell after "$" (SVG would collapse a trailing space)
@@ -136,7 +136,7 @@ def terminal():
             [("too many to count. ", "#e2e8f0"), ("most of them live in private repos 🤫", "#94a3b8")],
         ]),
         ("sudo make coffee", [
-            [("[sudo] password for vusallmammad: ", "#94a3b8"), ("********", "#94a3b8")],
+            [("[sudo] password for Lone: ", "#94a3b8"), ("********", "#94a3b8")],
             [("☕ brewing... ", AMBER), ("done.", GREEN), (" productivity +40%", "#e2e8f0")],
         ]),
     ]
@@ -196,11 +196,11 @@ def terminal():
   <rect width="{W}" height="{H}" rx="16" fill="none" stroke="#1f2a44" stroke-width="2"/>
   <path d="M0 16 a16 16 0 0 1 16 -16 h{W - 32} a16 16 0 0 1 16 16 v20 h-{W} z" fill="#151c33"/>
   <circle cx="26" cy="18" r="6.5" fill="#ff5f57"/><circle cx="48" cy="18" r="6.5" fill="#febc2e"/><circle cx="70" cy="18" r="6.5" fill="#28c840"/>
-  <text x="{W / 2}" y="23" text-anchor="middle" fill="#64748b" style="font-size:13px">vusallmammad — zsh — 100×{len(body)}</text>
+  <text x="{W / 2}" y="23" text-anchor="middle" fill="#64748b" style="font-size:13px">Lone — zsh — 100×{len(body)}</text>
   {''.join(body)}
   {cursor}
 </svg>'''
-    (OUT / "terminal.svg").write_text(svg, encoding="utf-8")
+    (OUT / "shell.svg").write_text(svg, encoding="utf-8")
 
 
 # ---------------------------------------------------------------- character sheet
@@ -286,7 +286,7 @@ def stats():
     <animate attributeName="stroke-dashoffset" values="0;-32" dur="2s" repeatCount="indefinite"/>
   </rect>
   <text x="34" y="46" class="mono" font-size="15" font-weight="700" fill="#e2e8f0" letter-spacing="4">⚔ CHARACTER SHEET</text>
-  <text x="{W - 34}" y="46" text-anchor="end" class="mono" font-size="12" fill="#64748b">player: vusallmammad · save slot 1</text>
+  <text x="{W - 34}" y="46" text-anchor="end" class="mono" font-size="12" fill="#64748b">player: Lone · save slot 1</text>
   <g transform="translate(26 76)">
     <animateTransform attributeName="transform" type="translate" values="26 76;26 70;26 76" dur="2.2s" repeatCount="indefinite"/>
     {''.join(pix)}
@@ -297,7 +297,7 @@ def stats():
   <line x1="34" y1="{H - 56}" x2="{W - 34}" y2="{H - 56}" stroke="#334155"/>
   <text x="34" y="{H - 26}" class="mono" font-size="13" fill="#94a3b8"><tspan fill="{AMBER}">PERKS </tspan>{escape(perks)}</text>
 </svg>'''
-    (OUT / "stats.svg").write_text(svg, encoding="utf-8")
+    (OUT / "sheet.svg").write_text(svg, encoding="utf-8")
 
 
 # ---------------------------------------------------------------- footer

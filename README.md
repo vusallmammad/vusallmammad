@@ -1,7 +1,7 @@
 <!-- every image sits in <picture> so GitHub does not turn it into a link to the raw file -->
 <div align="center">
 
-<picture><img src="assets/header.svg" width="100%" alt="vusallmammad — animated banner with a waving robot"/></picture>
+<picture><img src="assets/hero.svg" width="100%" alt="Lone — animated banner with a waving robot"/></picture>
 
 <br/>
 
@@ -11,11 +11,11 @@
 
 <br/>
 
-<picture><img src="assets/terminal.svg" width="100%" alt="Terminal: whoami — automation engineer, student dev, professional button-presser"/></picture>
+<picture><img src="assets/shell.svg" width="100%" alt="Terminal: whoami — automation engineer, student dev, professional button-presser"/></picture>
 
 <br/>
 
-<picture><img src="assets/stats.svg" width="100%" alt="Character sheet: Automation Wizard with skill bars"/></picture>
+<picture><img src="assets/sheet.svg" width="100%" alt="Character sheet: Automation Wizard with skill bars"/></picture>
 
 <p align="center">
   <picture><img src="https://skillicons.dev/icons?i=ts,react,azure,powershell,python,java,html,css,git,github,vscode&perline=11&theme=dark" alt="TypeScript, React, Azure, PowerShell, Python, Java, HTML, CSS, Git, GitHub, VS Code"/></picture>
