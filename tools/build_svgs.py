@@ -366,6 +366,6 @@ def badges():
 
 
 if __name__ == "__main__":
-    header(); terminal(); stats(); footer(); badges()
+    header(); terminal(); stats(); badges()
     for f in sorted(OUT.glob("*.svg")):
         print(f.name, f.stat().st_size, "bytes")
