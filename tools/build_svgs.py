@@ -343,7 +343,29 @@ def footer():
     (OUT / "footer.svg").write_text(svg, encoding="utf-8")
 
 
+# ---------------------------------------------------------------- badge row (plain black / navy, normal size)
+def badges():
+    items = [("status", "probably automating something"), ("coffee", "→ code"), ("bugs squashed", "lost count")]
+    CH, PAD, GAP, H = 6.6, 8, 8, 20          # ~Verdana 11px char width, side padding, gap between badges
+    x, parts = 0.0, []
+    for label, value in items:
+        lw, vw = len(label) * CH + 2 * PAD, len(value) * CH + 2 * PAD
+        parts.append(
+            f'<g transform="translate({x:.1f} 0)">'
+            f'<rect width="{lw + vw:.1f}" height="{H}" rx="3" fill="#1f2a44"/>'
+            f'<path d="M3 0h{lw - 3:.1f}v{H}h-{lw - 3:.1f}a3 3 0 0 1 -3 -3v-{H - 6}a3 3 0 0 1 3 -3z" fill="#0d1117"/>'
+            f'<text x="{lw / 2:.1f}" y="14" text-anchor="middle" fill="#c9d1d9">{escape(label)}</text>'
+            f'<text x="{lw + vw / 2:.1f}" y="14" text-anchor="middle" fill="#ffffff">{escape(value)}</text></g>')
+        x += lw + vw + GAP
+    W = x - GAP
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.1f} {H}" width="{W:.1f}" height="{H}" role="img" '
+           f'aria-label="status: probably automating something · coffee → code · bugs squashed: lost count">'
+           f'<style>text{{font-family:Verdana,"DejaVu Sans",Geneva,sans-serif;font-size:11px}}</style>'
+           + "".join(parts) + '</svg>')
+    (OUT / "badges.svg").write_text(svg, encoding="utf-8")
+
+
 if __name__ == "__main__":
-    header(); terminal(); stats(); footer()
+    header(); terminal(); stats(); footer(); badges()
     for f in sorted(OUT.glob("*.svg")):
         print(f.name, f.stat().st_size, "bytes")

@@ -5,9 +5,7 @@
 
 <br/>
 
-<picture><img src="https://img.shields.io/badge/status-probably_automating_something-1f2a44?style=flat-square&labelColor=0d1117" alt="status"/></picture>
-<picture><img src="https://img.shields.io/badge/coffee-→_code-1f2a44?style=flat-square&labelColor=0d1117" alt="coffee to code"/></picture>
-<picture><img src="https://img.shields.io/badge/bugs_squashed-lost_count-1f2a44?style=flat-square&labelColor=0d1117" alt="bugs squashed"/></picture>
+<picture><img src="assets/badges.svg" alt="status: probably automating something · coffee → code · bugs squashed: lost count"/></picture>
 
 </div>
 
